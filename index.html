@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMO | HTML & CSS • EDITOR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/theme/dracula.min.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/htmlmixed/htmlmixed.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/css/css.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/python/python.min.js"></script> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #333333;
+            margin: 0;
+            padding: 0;
+            font-family: "Playwrite DE Grund", cursive;
+            font-optical-sizing: auto;
+            font-style: normal;
+          }
+        .container {
+            max-width: 100%;
+            width: 90%;
+            margin: 0px auto;
+            background-color: #fff;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color:mediumslateblue ;
+            font-size: 1.2rem;
+        }
+        #code-editor {
+            height: 400px;
+        }
+        .editor-wrapper {
+            border: 2px solid mediumslateblue;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .CodeMirror {
+            height: 50%;
+            font-size: 16px;
+        }
+        #result {
+            width: 100%;
+            height: 400px;
+            border: 2px solid mediumslateblue;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .buttons {
+            display:flex;
+            Justify-content: space-evenly;
+        }
+
+        button {
+            background-color:mediumslateblue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 4px;
+        }
+
+        button:hover {
+            background-color: #333333;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        footer {
+            background-color: #f8f8f8;
+            padding: 10px;
+            text-align: center;
+            width: 95%;
+            margin:10px auto;
+        }
+        /*.social-icons {
+            margin: 20px 0;
+        }
+         .social-icons a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 24px;
+        }*/
+        .footer-info {
+            margin: 10px 0;
+           color:mediumslateblue;
+        }
+
+        @media (max-width: 768px) {
+            #code-editor, #result {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+   <div class="container">
+    	 <h1>{ SMO EDITOR }</h1>
+        <div class="editor-wrapper">
+            <textarea id="code-editor">
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+
+  </style>
+</head>
+<body>
+	
+ <h1>Hello I AM SMO</h1>
+<p>Edit html and css codes on 
+my website for free</p>
+
+</body>
+</html>
+            </textarea>
+             <div class="buttons">
+                    <button onclick="runCode()">Run <i class="fa-solid fa-code"></i></button>
+                    <button onclick="copyCode()">Copy <i class="fa-solid fa-copy"></i> </button>
+                   <button onclick="pasteCode()">Paste <i class="fa-solid fa-clipboard"></i></button>
+                   <button onclick="clearCode()">Clear <i class="fa-solid fa-trash-can"></i></button>
+            </div>
+        </div>
+        <iframe id="result"></iframe>
+        <footer>
+       <!-- <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="tel:+1234567890"><i class="fas fa-phone"></i></a>
+            <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>-->
+        <div class="footer-info">
+            <p>© 2024 SMO Code Editor Website.</p>
+            <!--<p>This website is designed to provide an online HTML and CSS code editor.</p>-->
+        </div>
+    </footer>
+</div>
+<script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+            lineNumbers: true, 
+            mode: "htmlmixed", 
+            theme: "dracula", 
+            tabSize: 2 
+        });
+
+        //run code
+        function runCode() {
+            var code = editor.getValue(); 
+            var resultFrame = document.getElementById('result');
+            var resultDoc = resultFrame.contentDocument || resultFrame.contentWindow.document;
+            resultDoc.open();
+            resultDoc.write(code); 
+            resultDoc.close();
+        }
+          
+         //copy code 
+        function copyCode() {
+            var code = editor.getValue();
+            navigator.clipboard.writeText(code).then(function() {
+                alert('تم نسخ الكود!');
+            }, function() {
+                alert('فشل النسخ');
+            });
+        }     
+        
+       //paste code 
+	  function pasteCode() {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+      navigator.permissions.query({ name: 'clipboard-read' }).then(result => {
+            if (result.state === 'granted' || result.state === 'prompt') {
+                navigator.clipboard.readText().then(function(text) {
+                    editor.setValue(text);
+                }).catch(function(err) {
+                    console.error('Error reading clipboard content:', err);
+                });
+             } else {
+                console.error('Clipboard permissions not granted.');
+            }
+            }).catch(function(err) {
+            console.error('Permission check failed:', err);
+           });
+             } else {
+        console.error('Clipboard API not supported in this browser.');
+           }}
+        
+        function pasteCode() {
+            navigator.clipboard.readText().then(function(text) {
+                editor.setValue(text);
+            }).catch(function(err) {
+                console.error('error', err);
+            });
+        }
+        
+        //clear code
+        function clearCode() {
+            editor.setValue(""); 
+        }
+        
+        document.addEventListener('contextmenu', function(e) {
+           e.preventDefault();
+        }, false);
+        
+        document.onkeydown = function(e) {
+   if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0))) {
+      return false;
+   }};
+</script>
+</body>
+</html>
